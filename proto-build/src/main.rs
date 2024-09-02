@@ -24,6 +24,7 @@ const COSMOS_SDK_REV: &str = "v0.50.9";
 
 /// The wasmd commit or tag to be cloned and used to build the proto files
 const WASMD_REV: &str = "v0.52.0";
+const INJECTIVE_REV: &str = "v1.13.2";
 
 // All paths must end with a / and either be absolute or include a ./ to reference the current
 // working directory.
@@ -34,6 +35,7 @@ const COSMOS_SDK_PROTO_DIR: &str = "../cosmos-sdk-proto/src/prost/";
 const COSMOS_SDK_DIR: &str = "../cosmos-sdk-go";
 /// Directory where the submodule is located
 const WASMD_DIR: &str = "../wasmd";
+const INJECTIVE_DIR: &str = "../injective";
 /// A temporary directory for proto building
 const TMP_BUILD_DIR: &str = "/tmp/tmp-protobuf/";
 
@@ -70,18 +72,23 @@ fn main() {
 
     let temp_sdk_dir = tmp_build_dir.join("cosmos-sdk");
     let temp_wasmd_dir = tmp_build_dir.join("wasmd");
+    let temp_injective_dir = tmp_build_dir.join("injective");
 
     fs::create_dir_all(&temp_sdk_dir).unwrap();
     fs::create_dir_all(&temp_wasmd_dir).unwrap();
+    fs::create_dir_all(&temp_injective_dir).unwrap();
 
     update_submodules();
     output_sdk_version(&temp_sdk_dir);
     output_wasmd_version(&temp_wasmd_dir);
+    output_injective_version(&temp_injective_dir);
     compile_sdk_protos_and_services(&temp_sdk_dir);
     compile_wasmd_proto_and_services(&temp_wasmd_dir);
+    compile_injective_proto_and_services(&temp_injective_dir);
 
     copy_generated_files(&temp_sdk_dir, &proto_dir.join("cosmos-sdk"));
     copy_generated_files(&temp_wasmd_dir, &proto_dir.join("wasmd"));
+    copy_generated_files(&temp_injective_dir, &proto_dir.join("injective"));
 
     apply_patches(&proto_dir);
 
@@ -90,8 +97,8 @@ fn main() {
 
     if is_github() {
         println!(
-            "Rebuild protos with proto-build (cosmos-sdk rev: {}, wasmd rev: {}))",
-            COSMOS_SDK_REV, WASMD_REV
+            "Rebuild protos with proto-build (cosmos-sdk rev: {}, wasmd rev: {} injective rev: {}))",
+            COSMOS_SDK_REV, WASMD_REV, INJECTIVE_REV
         );
     }
 }
@@ -184,6 +191,11 @@ fn update_submodules() {
     run_git(["submodule", "update", "--init"]);
     run_git(["-C", WASMD_DIR, "fetch"]);
     run_git(["-C", WASMD_DIR, "reset", "--hard", WASMD_REV]);
+
+    info!("Updating injective submodule...");
+    run_git(["submodule", "update", "--init"]);
+    run_git(["-C", INJECTIVE_DIR, "fetch"]);
+    run_git(["-C", INJECTIVE_DIR, "reset", "--hard", INJECTIVE_REV]);
 }
 
 fn output_sdk_version(out_dir: &Path) {
@@ -194,6 +206,11 @@ fn output_sdk_version(out_dir: &Path) {
 fn output_wasmd_version(out_dir: &Path) {
     let path = out_dir.join("WASMD_COMMIT");
     fs::write(path, WASMD_REV).unwrap();
+}
+
+fn output_injective_version(out_dir: &Path) {
+    let path = out_dir.join("INJECTIVE_COMMIT");
+    fs::write(path, INJECTIVE_REV).unwrap();
 }
 
 fn compile_sdk_protos_and_services(out_dir: &Path) {
@@ -221,6 +238,29 @@ fn compile_wasmd_proto_and_services(out_dir: &Path) {
     // Compile all proto client for GRPC services
     info!("Compiling wasmd proto clients for GRPC services!");
     run_buf("buf.wasmd.gen.yaml", proto_path, out_dir);
+    info!("=> Done!");
+}
+
+fn compile_injective_proto_and_services(out_dir: &Path) {
+    let sdk_dir = Path::new(INJECTIVE_DIR);
+
+    let proto_path = sdk_dir.join("proto");
+    let proto_paths = [
+        format!("{}/third_party/proto", sdk_dir.display()),
+
+        format!("{}/proto/auction", sdk_dir.display()),
+        format!("{}/proto/oracle", sdk_dir.display()),
+        format!("{}/proto/wasmx", sdk_dir.display()),
+    ];
+
+    // List available proto files
+    let mut protos: Vec<PathBuf> = vec![];
+    collect_protos(&proto_paths, &mut protos);
+
+    // Compile all proto client for GRPC services
+    info!("Compiling injective proto clients for GRPC services!");
+    run_buf("buf.injective.gen.yaml", proto_path, out_dir);
+
     info!("=> Done!");
 }
 
