@@ -232,3 +232,93 @@ pub mod cosmwasm {
         }
     }
 }
+pub mod injective {
+    pub mod auction {
+        // @@protoc_insertion_point(attribute:injective.auction.v1beta1)
+        pub mod v1beta1 {
+            //     use cosmrs::tx::Msg;
+
+            include!("prost/injective/injective.auction.v1beta1.rs");
+            // @@protoc_insertion_point(injective.auction.v1beta1)
+        }
+    }
+    pub mod crypto {
+        pub mod v1beta1 {
+            // @@protoc_insertion_point(attribute:injective.crypto.v1beta1.ethsecp256k1)
+            pub mod ethsecp256k1 {
+                include!(
+                    "prost/injective/injective.crypto.v1beta1.ethsecp256k1.\
+                     rs"
+                );
+                // @@protoc_insertion_point(injective.crypto.v1beta1.ethsecp256k1)
+            }
+        }
+    }
+    pub mod exchange {
+        // @@protoc_insertion_point(attribute:injective.exchange.v1beta1)
+        pub mod v1beta1 {
+            include!("prost/injective/injective.exchange.v1beta1.rs");
+            // @@protoc_insertion_point(injective.exchange.v1beta1)
+        }
+    }
+    pub mod insurance {
+        // @@protoc_insertion_point(attribute:injective.insurance.v1beta1)
+        pub mod v1beta1 {
+            include!("prost/injective/injective.insurance.v1beta1.rs");
+            // @@protoc_insertion_point(injective.insurance.v1beta1)
+        }
+    }
+    pub mod ocr {
+        // @@protoc_insertion_point(attribute:injective.ocr.v1beta1)
+        pub mod v1beta1 {
+            include!("prost/injective/injective.ocr.v1beta1.rs");
+            // @@protoc_insertion_point(injective.ocr.v1beta1)
+        }
+    }
+    pub mod oracle {
+        // @@protoc_insertion_point(attribute:injective.oracle.v1beta1)
+        pub mod v1beta1 {
+            include!("prost/injective/injective.oracle.v1beta1.rs");
+            // @@protoc_insertion_point(injective.oracle.v1beta1)
+        }
+    }
+    pub mod peggy {
+        // @@protoc_insertion_point(attribute:injective.peggy.v1)
+        pub mod v1 {
+            include!("prost/injective/injective.peggy.v1.rs");
+            // @@protoc_insertion_point(injective.peggy.v1)
+        }
+    }
+    pub mod permissions {
+        // @@protoc_insertion_point(attribute:injective.permissions.v1beta1)
+        pub mod v1beta1 {
+            include!("prost/injective/injective.permissions.v1beta1.rs");
+            // @@protoc_insertion_point(injective.permissions.v1beta1)
+        }
+    }
+
+    pub mod tokenfactory {
+        // @@protoc_insertion_point(attribute:injective.tokenfactory.v1beta1)
+        pub mod v1beta1 {
+            include!("prost/injective/injective.tokenfactory.v1beta1.rs");
+            // @@protoc_insertion_point(injective.tokenfactory.v1beta1)
+        }
+    }
+    pub mod types {
+        // @@protoc_insertion_point(attribute:injective.types.v1beta1)
+        pub mod v1beta1 {
+            include!("prost/injective/injective.types.v1beta1.rs");
+            // @@protoc_insertion_point(injective.types.v1beta1)
+        }
+    }
+
+  /*  pub mod wasmx {
+        // @@protoc_insertion_point(attribute:injective.wasmx.v1)
+        pub mod v1 {
+            include!("prost/injective/injective.wasmx.v1.rs");
+            // @@protoc_insertion_point(injective.wasmx.v1)
+        }
+    }
+
+   */
+}
