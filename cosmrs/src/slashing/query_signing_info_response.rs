@@ -22,7 +22,7 @@ impl TryFrom<proto::cosmos::slashing::v1beta1::QuerySigningInfoResponse>
         })
     }
 }
-
+/*
 impl From<QuerySigningInfoResponse> for proto::cosmos::slashing::v1beta1::QuerySigningInfoResponse {
     fn from(signing_info_response: QuerySigningInfoResponse) -> Self {
         proto::cosmos::slashing::v1beta1::QuerySigningInfoResponse {
@@ -30,3 +30,4 @@ impl From<QuerySigningInfoResponse> for proto::cosmos::slashing::v1beta1::QueryS
         }
     }
 }
+*/

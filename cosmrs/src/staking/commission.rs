@@ -22,7 +22,7 @@ impl TryFrom<proto::cosmos::staking::v1beta1::Commission> for Commission {
             update_time: proto
                 .update_time
                 .map(|jailed_until| {
-                    cosmos_sdk_proto::tendermint::google::protobuf::Timestamp {
+                    tendermint_proto::google::protobuf::Timestamp {
                         seconds: jailed_until.seconds,
                         nanos: jailed_until.nanos,
                     }
@@ -39,7 +39,7 @@ impl From<Commission> for proto::cosmos::staking::v1beta1::Commission {
             commission_rates: commission.commission_rates.map(Into::into),
             update_time: commission
                 .update_time
-                .map(cosmos_sdk_proto::tendermint::google::protobuf::Timestamp::from)
+                .map(tendermint_proto::google::protobuf::Timestamp::from)
                 .map(|t| Timestamp {
                     seconds: t.seconds,
                     nanos: t.nanos,

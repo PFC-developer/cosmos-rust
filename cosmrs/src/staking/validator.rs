@@ -74,7 +74,7 @@ impl TryFrom<proto::cosmos::staking::v1beta1::Validator> for Validator {
             unbonding_time: proto
                 .unbonding_time
                 .map(|jailed_until| {
-                    cosmos_sdk_proto::tendermint::google::protobuf::Timestamp {
+                    tendermint_proto::google::protobuf::Timestamp {
                         seconds: jailed_until.seconds,
                         nanos: jailed_until.nanos,
                     }
@@ -102,7 +102,7 @@ impl From<Validator> for proto::cosmos::staking::v1beta1::Validator {
             unbonding_on_hold_ref_count: validator.unbonding_on_hold_ref_count,
             unbonding_time: validator
                 .unbonding_time
-                .map(cosmos_sdk_proto::tendermint::google::protobuf::Timestamp::from)
+                .map(tendermint_proto::google::protobuf::Timestamp ::from)
                 .map(|t| Timestamp {
                     seconds: t.seconds,
                     nanos: t.nanos,

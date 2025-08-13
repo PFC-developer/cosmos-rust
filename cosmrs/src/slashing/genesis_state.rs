@@ -31,7 +31,7 @@ impl TryFrom<proto::cosmos::slashing::v1beta1::GenesisState> for GenesisState {
         })
     }
 }
-
+/*
 impl From<GenesisState> for cosmos_sdk_proto::cosmos::slashing::v1beta1::GenesisState {
     fn from(genesis_state: GenesisState) -> Self {
         cosmos_sdk_proto::cosmos::slashing::v1beta1::GenesisState {
@@ -49,3 +49,4 @@ impl From<GenesisState> for cosmos_sdk_proto::cosmos::slashing::v1beta1::Genesis
         }
     }
 }
+*/

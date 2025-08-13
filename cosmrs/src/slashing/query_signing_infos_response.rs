@@ -31,7 +31,7 @@ impl TryFrom<proto::cosmos::slashing::v1beta1::QuerySigningInfosResponse>
         })
     }
 }
-
+/*
 impl From<QuerySigningInfosResponse>
     for proto::cosmos::slashing::v1beta1::QuerySigningInfosResponse
 {
@@ -46,3 +46,4 @@ impl From<QuerySigningInfosResponse>
         }
     }
 }
+*/

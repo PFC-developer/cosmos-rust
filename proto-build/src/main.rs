@@ -74,7 +74,7 @@ fn main() {
     fs::create_dir_all(&temp_sdk_dir).unwrap();
     fs::create_dir_all(&temp_wasmd_dir).unwrap();
 
-    update_submodules();
+    // update_submodules();
     output_sdk_version(&temp_sdk_dir);
     output_wasmd_version(&temp_wasmd_dir);
     compile_sdk_protos_and_services(&temp_sdk_dir);
@@ -137,7 +137,18 @@ fn run_cmd(cmd: impl AsRef<OsStr>, args: impl IntoIterator<Item = impl AsRef<OsS
     }
 }
 
-fn run_buf(config: &str, proto_path: impl AsRef<Path>, out_dir: impl AsRef<Path>) {
+fn run_buf(_config: &str, proto_path: impl AsRef<Path> + std::fmt::Debug, out_dir: impl AsRef<Path> + std::fmt::Debug) {
+
+   // info!(format!("OUT DIR={:?} proto_path={:?} -- config {config} pwd {:?}",out_dir, proto_path,  env::current_dir().unwrap().to_str().unwrap()));
+
+    //let buf_yaml = proto_path.as_ref().join("buf.yaml");
+   // fs::copy(&config, &buf_yaml).unwrap();
+    let buf_config = tonic_buf_build::TonicBufConfig{buf_dir: Some(proto_path)};
+    env::set_var("OUT_DIR", out_dir.as_ref());
+    tonic_buf_build::compile_from_buf_with_config(&buf_config).unwrap();
+    /*
+
+
     run_cmd(
         "buf",
         [
@@ -150,6 +161,8 @@ fn run_buf(config: &str, proto_path: impl AsRef<Path>, out_dir: impl AsRef<Path>
             &proto_path.as_ref().display().to_string(),
         ],
     );
+
+     */
 }
 
 fn run_git(args: impl IntoIterator<Item = impl AsRef<OsStr>>) {
@@ -174,6 +187,7 @@ fn run_rustfmt(dir: &Path) {
     run_cmd("rustfmt", args);
 }
 
+#[allow(dead_code)]
 fn update_submodules() {
     info!("Updating cosmos/cosmos-sdk submodule...");
     run_git(["submodule", "update", "--init"]);
@@ -366,7 +380,7 @@ fn apply_patches(proto_dir: &Path) {
         )
         .expect("error patching cosmos.staking.v1beta1.rs");
     }
-
+/*
     for (pattern, replacement) in [
         (
             "stake_authorization::Validators::AllowList",
@@ -384,4 +398,6 @@ fn apply_patches(proto_dir: &Path) {
         )
         .expect("error patching cosmos.staking.v1beta1.serde.rs");
     }
+
+ */
 }

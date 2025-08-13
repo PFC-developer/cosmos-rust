@@ -1,15 +1,21 @@
 [package]
 name = "proto-build"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Justin Kilpatrick <justin@althea.net>", "Tony Arcieri <tony@iqlusion.io>"]
 edition = "2018"
 publish = false
 rust-version = "1.75"
 
 [dependencies]
-prost = "0.13"
-prost-build = "0.13"
-tonic = "0.13"
-tonic-build = "0.13"
-regex = "1"
-walkdir = "2"
+prost = "0.14.1"
+prost-build = "0.14.1"
+tonic = "0.13.1"
+#tonic-build = "0.13.1"
+#serde={version="1.0", features = ["derive"]}
+#serde_yaml_ng = "0.10.0"
+#tonic-buf-build ={ version = "0.3.1"}
+tonic-buf-build ={ git="https://github.com/habitatai/tonic-buf-build", branch="chore/deps-update"}
+tonic-prost = "0.14.1"
+tonic-prost-build = "0.14.1"
+regex = "1.11"
+walkdir = "2.5"

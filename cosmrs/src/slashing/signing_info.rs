@@ -24,7 +24,7 @@ impl TryFrom<proto::cosmos::slashing::v1beta1::SigningInfo> for SigningInfo {
         })
     }
 }
-
+/*
 impl From<SigningInfo> for cosmos_sdk_proto::cosmos::slashing::v1beta1::SigningInfo {
     fn from(signing_info: SigningInfo) -> Self {
         cosmos_sdk_proto::cosmos::slashing::v1beta1::SigningInfo {
@@ -33,3 +33,4 @@ impl From<SigningInfo> for cosmos_sdk_proto::cosmos::slashing::v1beta1::SigningI
         }
     }
 }
+*/

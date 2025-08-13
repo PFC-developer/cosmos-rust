@@ -1,5 +1,5 @@
 use crate::{proto, AccountId, ErrorReport, Result};
-use cosmos_sdk_proto::Timestamp;
+// use cosmos_sdk_proto::Timestamp;
 use tendermint::time::Time;
 
 /// ValidatorSigningInfo defines a validator's signing info for monitoring their
@@ -44,7 +44,8 @@ impl TryFrom<proto::cosmos::slashing::v1beta1::ValidatorSigningInfo> for Validat
                 // annoyingly, tendermint uses a different type for its protobuf `Timestamp` than the one
                 // in cosmos proto files. However, internally they have exactly the same layout
                 .map(|jailed_until| {
-                    cosmos_sdk_proto::tendermint::google::protobuf::Timestamp {
+                    //cosmos_sdk_proto::tendermint::google::protobuf::Timestamp {
+                    tendermint_proto::google::protobuf::Timestamp {
                         seconds: jailed_until.seconds,
                         nanos: jailed_until.nanos,
                     }
@@ -56,7 +57,7 @@ impl TryFrom<proto::cosmos::slashing::v1beta1::ValidatorSigningInfo> for Validat
         })
     }
 }
-
+/*
 impl From<ValidatorSigningInfo> for proto::cosmos::slashing::v1beta1::ValidatorSigningInfo {
     fn from(signing_info: ValidatorSigningInfo) -> Self {
         proto::cosmos::slashing::v1beta1::ValidatorSigningInfo {
@@ -65,7 +66,7 @@ impl From<ValidatorSigningInfo> for proto::cosmos::slashing::v1beta1::ValidatorS
             index_offset: signing_info.index_offset,
             jailed_until: signing_info
                 .jailed_until
-                .map(cosmos_sdk_proto::tendermint::google::protobuf::Timestamp::from)
+                .map(tendermint_proto::google::protobuf::Timestamp::from)
                 .map(|t| Timestamp {
                     seconds: t.seconds,
                     nanos: t.nanos,
@@ -75,3 +76,4 @@ impl From<ValidatorSigningInfo> for proto::cosmos::slashing::v1beta1::ValidatorS
         }
     }
 }
+*/

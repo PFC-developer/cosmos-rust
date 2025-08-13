@@ -1,5 +1,5 @@
 use crate::staking::Validator;
-use crate::{proto, ErrorReport, Result};
+// use crate::{proto, ErrorReport, Result};
 use tendermint::block::Header;
 
 /// HistoricalInfo contains header and validator information for a given block.
@@ -14,7 +14,7 @@ pub struct HistoricalInfo {
     /// The validator set at the block
     pub valset: Vec<Validator>,
 }
-
+/*
 impl TryFrom<proto::cosmos::staking::v1beta1::HistoricalInfo> for HistoricalInfo {
     type Error = ErrorReport;
 
@@ -29,7 +29,8 @@ impl TryFrom<proto::cosmos::staking::v1beta1::HistoricalInfo> for HistoricalInfo
         })
     }
 }
-
+*/
+/*
 impl From<HistoricalInfo> for proto::cosmos::staking::v1beta1::HistoricalInfo {
     fn from(historical_info: HistoricalInfo) -> Self {
         proto::cosmos::staking::v1beta1::HistoricalInfo {
@@ -38,3 +39,4 @@ impl From<HistoricalInfo> for proto::cosmos::staking::v1beta1::HistoricalInfo {
         }
     }
 }
+*/

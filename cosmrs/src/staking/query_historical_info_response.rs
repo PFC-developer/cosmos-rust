@@ -1,5 +1,5 @@
 use crate::staking::HistoricalInfo;
-use crate::{proto, ErrorReport, Result};
+// use crate::{proto, ErrorReport, Result};
 
 /// QueryHistoricalInfoResponse is response type for the Query/HistoricalInfo RPC
 /// method.
@@ -8,7 +8,7 @@ pub struct QueryHistoricalInfoResponse {
     /// hist defines the historical info at the given height.
     pub hist: Option<HistoricalInfo>,
 }
-
+/*
 impl TryFrom<proto::cosmos::staking::v1beta1::QueryHistoricalInfoResponse>
     for QueryHistoricalInfoResponse
 {
@@ -22,7 +22,8 @@ impl TryFrom<proto::cosmos::staking::v1beta1::QueryHistoricalInfoResponse>
         })
     }
 }
-
+*/
+/*
 impl From<QueryHistoricalInfoResponse>
     for proto::cosmos::staking::v1beta1::QueryHistoricalInfoResponse
 {
@@ -32,3 +33,4 @@ impl From<QueryHistoricalInfoResponse>
         }
     }
 }
+*/
