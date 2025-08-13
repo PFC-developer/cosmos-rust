@@ -261,7 +261,7 @@ dependencies = [
  "prost 0.14.1",
  "prost-types",
  "serde",
- "tendermint-proto 0.40.5",
+ "tendermint-proto",
  "tonic 0.14.1",
  "tonic-prost",
  "tonic-prost-build",
@@ -283,7 +283,7 @@ dependencies = [
  "signature",
  "subtle-encoding",
  "tendermint",
- "tendermint-proto 0.40.5 (git+https://github.com/PFC-developer/tendermint-rs.git?branch=prost-14.1)",
+ "tendermint-proto",
  "tendermint-rpc",
  "thiserror",
  "tokio",
@@ -2035,7 +2035,7 @@ dependencies = [
  "signature",
  "subtle",
  "subtle-encoding",
- "tendermint-proto 0.40.5 (git+https://github.com/PFC-developer/tendermint-rs.git?branch=prost-14.1)",
+ "tendermint-proto",
  "time",
  "zeroize",
 ]
@@ -2051,19 +2051,6 @@ dependencies = [
  "tendermint",
  "toml",
  "url",
-]
-
-[[package]]
-name = "tendermint-proto"
-version = "0.40.5"
-dependencies = [
- "bytes",
- "flex-error",
- "prost 0.14.1",
- "serde",
- "serde_bytes",
- "subtle-encoding",
- "time",
 ]
 
 [[package]]
@@ -2102,7 +2089,7 @@ dependencies = [
  "subtle-encoding",
  "tendermint",
  "tendermint-config",
- "tendermint-proto 0.40.5 (git+https://github.com/PFC-developer/tendermint-rs.git?branch=prost-14.1)",
+ "tendermint-proto",
  "thiserror",
  "time",
  "tokio",
